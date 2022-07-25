@@ -2,16 +2,15 @@ from django.db import models
 from authentication.models import User
 
 
-class Expences(models.Model):
-    CATEGORY_OPTIONS = [
-        ("ONLINE_SERVICES", "ONLINE_SERVICES"),
-        ("TRAVEL", "TRAVEL"),
-        ("FOOD", "FOOD"),
-        ("RENT", "RENT"),
+class Income(models.Model):
+    SOURCE_OPTIONS = [
+        ("SALARY", "SALARY"),
+        ("BUSINESS", "BUSINESS"),
+        ("SIDE-HUSTLES", "SIDE-HUSTLES"),
         ("OTHERS", "OTHERS"),
     ]
 
-    category = models.CharField(choices=CATEGORY_OPTIONS, max_length=1255)
+    source = models.CharField(choices=SOURCE_OPTIONS, max_length=1255)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     description = models.TextField()
     owner = models.ForeignKey(to=User, on_delete=models.CASCADE)
@@ -21,4 +20,6 @@ class Expences(models.Model):
         ordering: ["-date"]
 
     def __str__(self):
-        return str(self.owner) + "$ income"
+        return str(self.owner)+"$ income"
+
+
