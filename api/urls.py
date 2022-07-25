@@ -24,7 +24,7 @@ schema_view = get_schema_view(
     openapi.Info(
         title="income expences API",
         default_version='v1',
-        description="An api for contact list",
+        description="An api for income expences",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="vivekneosoft@gmail.com"),
         license=openapi.License(name="test License"),
@@ -36,7 +36,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('auth/', include("authentication.urls")),
+    path('api/auth/', include("authentication.urls")),
     path('', schema_view.with_ui('swagger', cache_timeout=None), name='schema-swagger-ui'),
     path('^redoc', schema_view.with_ui('redoc', cache_timeout=None), name='schema-redoc'),
 ]
