@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "drf_yasg",
     "authentication",
+    "expences",
 ]
 
 MIDDLEWARE = [
@@ -123,13 +124,13 @@ django_heroku.settings(locals())
 JWT_SECRET_KEY = config('JWT_SECRET_KEY')
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
-        'Auth Token eg [Bearer (JWT)]': {
+        'Bearer': {
             'type': 'apiKey',
             'name': 'Authorization',
             'in': 'header',
         }
     },
-    'SUPPORTED_SUBMIT_METHODS': ['get', 'post', 'put', 'delete', 'patch'],
+    # 'SUPPORTED_SUBMIT_METHODS': ['get', 'post', 'put', 'delete', 'patch'],
 }
 AUTH_USER_MODEL = 'authentication.User'
 
