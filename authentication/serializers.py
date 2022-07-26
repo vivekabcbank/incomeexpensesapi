@@ -112,3 +112,5 @@ class SetNewPasswordSerializer(serializers.Serializer):
 # {
 #   "email": "vivek.athilkar100@gmail.com"
 # }
+
+# backports.zoneinfo==0.2.1
