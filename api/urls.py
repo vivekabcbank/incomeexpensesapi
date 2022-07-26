@@ -27,7 +27,7 @@ schema_view = get_schema_view(
         description="An api for income expences",
         terms_of_service="https://www.google.com/policies/terms/",
         contact=openapi.Contact(email="vivekneosoft@gmail.com"),
-        license=openapi.License(name="test License"),
+        license=openapi.License(name="test111 License"),
     ),
     validators=['ssv', 'flex'],
     public=True,
