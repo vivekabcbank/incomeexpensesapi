@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     "authentication",
     "expences",
     "income",
+    "corsheaders",
+    "userstats",
 ]
 
 MIDDLEWARE = [
@@ -51,6 +53,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
+    "django.middleware.common.CommonMiddleware",
 ]
 
 ROOT_URLCONF = 'api.urls'
@@ -150,6 +154,8 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=5),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=1),
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
 # ==================================================== smtp mail setup ========================
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
