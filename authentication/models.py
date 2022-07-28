@@ -11,21 +11,23 @@ class UserManager(BaseUserManager):
         if email is None:
             raise TypeError("user should have email")
 
-        user = self.model(username=username, email=self.normalize_email(email))
+        user = self.model(username=username, email=self.normalize_email(email) )
         user.set_password(password)
         user.save()
         return user
 
-    def create_superuser(self, username, email, passsword=None):
-        if passsword is None:
+    def create_superuser(self, username, email, password=None):
+        if password is None:
             raise TypeError("user should have passsword")
 
-        user = self.create_user(username, email, passsword)
+        user = self.create_user(username, email, password)
         user.is_superuser = True
         user.is_staff = True
         user.save()
         return user
 
+AUTH_PROVIDERS = {'facebook': 'facebook', 'google': 'google',
+                  'twitter': 'twitter', 'email': 'email'}
 
 class User(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(max_length=255, unique=True, db_index=True)
@@ -35,6 +37,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    social_login_id = models.CharField(max_length=2000, blank=True)
+
+    auth_provider = models.CharField(
+        max_length=255, blank=False,
+        null=False, default=AUTH_PROVIDERS.get('email'))
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ("username",)

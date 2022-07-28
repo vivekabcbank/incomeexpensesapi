@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "income",
     "corsheaders",
     "userstats",
+    "social_auth",
 ]
 
 MIDDLEWARE = [
