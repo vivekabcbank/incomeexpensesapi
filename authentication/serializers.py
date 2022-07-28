@@ -46,14 +46,13 @@ class LoginSerializer(serializers.ModelSerializer):
     # tokens = serializers.CharField(max_length=68, min_length=6, read_only=True)
     tokens = serializers.SerializerMethodField()
 
-    def get_tokens(self,obj):
+    def get_tokens(self, obj):
         user = User.objects.get(email=obj["email"])
 
         return {
             "access": user.tokens()["access"],
             "refresh": user.tokens()["refresh"]
         }
-
 
     class Meta:
         model = User
@@ -85,6 +84,7 @@ class LoginSerializer(serializers.ModelSerializer):
 
 class RequestPasswordEmailResetSerializer(serializers.Serializer):
     email = serializers.EmailField(min_length=2)
+    redirect_url = serializers.CharField(max_length=500,required=False)
 
     class Meta:
         fields = ("email",)
@@ -96,7 +96,7 @@ class SetNewPasswordSerializer(serializers.Serializer):
     uidb64 = serializers.CharField(min_length=1, write_only=True)
 
     class Meta:
-        fields = ("password","token","uidb64",)
+        fields = ("password", "token", "uidb64",)
 
     def validate(self, attrs):
         errors = {}
@@ -119,8 +119,19 @@ class SetNewPasswordSerializer(serializers.Serializer):
             raise serializers.ValidationError(errors)
         return super(SetNewPasswordSerializer, self).validate(self, attrs)
 
-# {
-#   "email": "vivek.athilkar100@gmail.com"
-# }
 
-# backports.zoneinfo==0.2.1
+class LogoutSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    default_error_messages = {
+        "bad_token": "Token is expired other invalid"
+    }
+
+    def validate(self, attrs):
+        self.token = attrs["refresh"]
+
+    def save(self, **kwargs):
+        try:
+            RefreshToken(set.token).blacklist()
+        except TokenError:
+            self.fail("bad_token")

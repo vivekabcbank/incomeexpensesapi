@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework_simplejwt.token_blacklist',
     "drf_yasg",
     "authentication",
     "expences",
@@ -167,3 +169,5 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 TWITTER_API_KEY = config('TWITTER_API_KEY')
 TWITTER_CONSUMER_SECRET = config('TWITTER_CONSUMER_SECRET')
 GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
+FRONTEND_URL = config('FRONTEND_URL')
+APP_SCHEME = config('APP_SCHEME')
