@@ -164,3 +164,6 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 # ===================================================== TEILIO Account Credentialis ================
+TWITTER_API_KEY = config('TWITTER_API_KEY')
+TWITTER_CONSUMER_SECRET = config('TWITTER_CONSUMER_SECRET')
+GOOGLE_CLIENT_ID = config('GOOGLE_CLIENT_ID')
